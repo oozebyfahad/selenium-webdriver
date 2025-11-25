@@ -4,20 +4,24 @@ pipeline {
         stage('Test') {
             steps {
                 sh '''
-                    # 1. Create virtual env (works only after python3-venv is installed)
+                    # 1. Create virtual env
                     python3 -m venv my_env
 
                     # 2. Activate venv
                     . my_env/bin/activate
 
-                    # 3. Update pip
+                    # 3. Upgrade pip
                     pip install --upgrade pip
 
-                    # 4. Install required libs
+                    # 4. Install dependencies
                     pip install selenium webdriver-manager
 
-                    # 5. Run test script
-                    python selenium-webdriver/TestScriptMay092025.py
+                    # 5. Debug: show where we are and what files exist
+                    pwd
+                    ls -la
+
+                    # 6. Run the test script in this folder
+                    python TestScriptMay092025.py
                 '''
             }
         }
